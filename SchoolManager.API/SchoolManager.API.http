@@ -1,0 +1,12 @@
+@SchoolManager.API_HostAddress = http://localhost:5228
+
+GET http://localhost:5228/other/hello
+Accept: application/json
+
+###
+GET http://localhost:5228/other/hello
+Accept: application/json
+
+###
+GET http://localhost:5228/api/student/asd/asdf
+Accept: application/json
