@@ -4,5 +4,7 @@ namespace SchoolManager.Application.Demographics;
 
 public interface IStudentApplication
 {
-    public string GetFullName(Student student);
+    int CreateStudent(Student student);
+    IList<Student> GetAllStudents();
 }
+

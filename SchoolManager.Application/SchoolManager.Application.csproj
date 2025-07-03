@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SchoolManager.Models\SchoolManager.Models.csproj" />
+      <ProjectReference Include="..\SchoolManager.Repository\SchoolManager.Repository.csproj" />
     </ItemGroup>
 
     <ItemGroup>

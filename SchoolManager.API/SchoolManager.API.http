@@ -10,3 +10,14 @@ Accept: application/json
 ###
 GET http://localhost:5228/api/student/asd/asdf
 Accept: application/json
+
+
+###
+POST http://localhost:5228/api/student/student
+Accept: application/json
+Content-Type: application/json
+
+{
+ "FirstName": "joe",
+ "LastName": "Doe"
+}
