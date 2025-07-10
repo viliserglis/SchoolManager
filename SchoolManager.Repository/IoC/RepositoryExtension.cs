@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SchoolManager.Repository.Infrastructure;
+using SchoolManager.Repository.Repositories.StudentRepository;
 
 namespace SchoolManager.Repository.IoC;
 
@@ -12,7 +13,7 @@ public static class RepositoryExtension
     {
         services.Configure<RepositoryConfiguration>(configuration.GetSection("RepositoryConfiguration"));
         services.AddTransient<IConnectionFactory, ConnectionFactory>();
-
+        services.AddTransient<IStudentRepository, StudentRepository>();
         using var provider = services.BuildServiceProvider();
         var options = provider.GetRequiredService<IOptions<RepositoryConfiguration>>() ??
                       throw new ArgumentNullException(nameof(RepositoryConfiguration));

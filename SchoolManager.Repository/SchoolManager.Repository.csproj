@@ -23,4 +23,8 @@
       <Folder Include="Constants\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SchoolManager.Models\SchoolManager.Models.csproj" />
+    </ItemGroup>
+
 </Project>
