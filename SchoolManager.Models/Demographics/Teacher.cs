@@ -1,6 +1,6 @@
 namespace SchoolManager.Models.Demographics;
 
-public class Student : Person
+public class Teacher : Person
 {
     
 }
