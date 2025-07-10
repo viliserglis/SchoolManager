@@ -1,6 +1,9 @@
+using SchoolManager.Models.Demographics;
+
 namespace SchoolManager.Application.Demographics;
 
-public class ITeacherApplication
+public interface ITeacherApplication
 {
-    
+    int CreateTeacher(Teacher teacher);
+    IList<Teacher> GetAllTeachers();
 }
