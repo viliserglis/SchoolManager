@@ -1,11 +1,18 @@
 using SchoolManager.Models.Demographics;
+using SchoolManager.Repository.Repositories.StudentRepository;
 
 namespace SchoolManager.Application.Demographics;
 
-public class StudentApplication : IStudentApplication
+public class StudentApplication(IStudentRepository studentRepository) : IStudentApplication
 {
-    public string GetFullName(Student student)
+    public int CreateStudent(Student student)
     {
-        return student.FirstName + " " + student.LastName;
+        return studentRepository.CreateStudent(student);
     }
+
+    public IList<Student> GetAllStudents()
+    {
+        return studentRepository.GetAllStudents();
+    }
+    
 }
