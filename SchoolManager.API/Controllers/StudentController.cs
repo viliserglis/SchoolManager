@@ -10,10 +10,17 @@ namespace SchoolManager.API.Controllers;
 public class StudentController(IStudentApplication studentApplication)
 {
     [HttpPost]
-    [Route("student")]
+    [Route("create")]
     public int CreateStudent([FromBody] Student student)
     {
         return studentApplication.CreateStudent(student);
+    }
+    
+    [HttpGet]
+    [Route("all")]
+    public IList<Student> GetAllStudents()
+    {
+        return studentApplication.GetAllStudents();
     }
 }
 

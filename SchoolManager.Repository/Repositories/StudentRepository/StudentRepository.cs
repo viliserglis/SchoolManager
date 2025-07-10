@@ -8,6 +8,14 @@ namespace SchoolManager.Repository.Repositories.StudentRepository;
 
 public class StudentRepository(IConnectionFactory connectionFactory) : IStudentRepository
 {
+
+    private readonly string[] _columms =
+    {
+
+         $"id as {nameof(Student.Id)}",
+         $"first_name as {nameof(Student.FirstName)}",
+         $"last_name as {nameof(Student.LastName)}",
+    };
     public int CreateStudent(Student student)
     {
         var query = new Query("demographics.students");
@@ -31,6 +39,11 @@ public class StudentRepository(IConnectionFactory connectionFactory) : IStudentR
 
     public IList<Student> GetAllStudents()
     {
-        throw new NotImplementedException();
+        var query = new Query("demographics.students");
+        query.Select(_columms);
+        var sql = new PostgresCompiler().Compile(query);
+        using var connection = connectionFactory.GetConnection();
+        var result = connection.Query<Student>(sql.Sql);
+        return result.ToList();
     }
 }

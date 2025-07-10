@@ -31,3 +31,7 @@ Content-Type: application/json
 "LastName": "Ms Doe",
   "qualification": "ABC"
 }
+
+###
+GET http://localhost:5228/api/student/all
+Accept: application/json
