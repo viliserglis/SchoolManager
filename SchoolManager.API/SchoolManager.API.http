@@ -21,3 +21,13 @@ Content-Type: application/json
  "FirstName": "joe",
  "LastName": "Doe"
 }
+###
+POST http://localhost:5228/api/teacher/teacher
+Accept: application/json
+Content-Type: application/json
+
+{
+"FirstName": "Ms joe",
+"LastName": "Ms Doe",
+  "qualification": "ABC"
+}

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SchoolManager.Repository.Infrastructure;
 using SchoolManager.Repository.Repositories.StudentRepository;
+using SchoolManager.Repository.Repositories.TeacherRepository;
 
 namespace SchoolManager.Repository.IoC;
 
@@ -14,6 +15,7 @@ public static class RepositoryExtension
         services.Configure<RepositoryConfiguration>(configuration.GetSection("RepositoryConfiguration"));
         services.AddTransient<IConnectionFactory, ConnectionFactory>();
         services.AddTransient<IStudentRepository, StudentRepository>();
+        services.AddTransient<ITeacherRepository, TeacherRepository>();
         using var provider = services.BuildServiceProvider();
         var options = provider.GetRequiredService<IOptions<RepositoryConfiguration>>() ??
                       throw new ArgumentNullException(nameof(RepositoryConfiguration));

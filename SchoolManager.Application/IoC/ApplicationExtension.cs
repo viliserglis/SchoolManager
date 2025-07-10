@@ -8,6 +8,7 @@ public static class ApplicationExtension
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddTransient<IStudentApplication, StudentApplication>();
+        services.AddTransient<ITeacherApplication, TeacherApplication>();
         
         return services;
     }
