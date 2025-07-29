@@ -15,4 +15,11 @@ public class TeacherController(ITeacherApplication TeacherApplication)
     {
         return TeacherApplication.CreateTeacher(teacher);
     }
+    
+    [HttpGet]
+    [Route("all")]
+    public IList<Teacher> GetAllTeachers()
+    {
+        return TeacherApplication.GetAllTeachers();
+    }
 }
