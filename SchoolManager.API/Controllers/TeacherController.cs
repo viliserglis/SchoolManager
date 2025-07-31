@@ -22,4 +22,11 @@ public class TeacherController(ITeacherApplication TeacherApplication)
     {
         return TeacherApplication.GetAllTeachers();
     }
+    
+    [HttpGet]
+    [Route("{id}")]
+    public Teacher GetById(int id)
+    {
+        return TeacherApplication.GetById(id);
+    }
 }

@@ -13,7 +13,9 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
         $"id as {nameof(Course.ID)}",
         $"name as {nameof(Course.Name)}",
         $"room as {nameof(Course.Room)}",
-        $"capacity as {nameof(Course.Capacity)}"
+        $"capacity as {nameof(Course.Capacity)}",
+        $"teacher_id as {nameof(Course.TeacherId)}",
+        
     };
     
     public int CreateCourse(Course course)
@@ -23,7 +25,8 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
         {
             ["name"] = course.Name,
             ["room"] = course.Room,
-            ["capacity"] = course.Capacity
+            ["capacity"] = course.Capacity,
+            ["teacher_id"] = course.TeacherId,
         };
 
         query.AsInsert(data);
@@ -45,5 +48,16 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
         using var connection = connectionFactory.GetConnection();
         var result = connection.Query<Course>(sql.Sql);
         return result.ToList();
+    }
+
+    public Course GetById(int id)
+    {
+        var query = new Query("academic.courses");
+        query.Select(_columns);
+        query.Where("id", id);
+        var sql = new PostgresCompiler().Compile(query);
+        using var connection = connectionFactory.GetConnection();
+        var result = connection.QueryFirst<Course>(sql.Sql, sql.NamedBindings);
+        return result;
     }
 } 

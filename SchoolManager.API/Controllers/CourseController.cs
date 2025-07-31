@@ -21,4 +21,11 @@ public class CourseController(ICourseApplication courseApplication)
     {
         return courseApplication.GetAllCourses();
     }
+
+    [HttpGet]
+    [Route("{id}")]
+    public Course GetById(int id)
+    {
+        return courseApplication.GetById(id);
+    }
 } 

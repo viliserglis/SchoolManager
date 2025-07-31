@@ -15,4 +15,9 @@ public class TeacherApplication(ITeacherRepository teacherRepository) : ITeacher
         return teacherRepository.GetAllTeachers();
     }
     
+    public Teacher GetById(int id)
+    {
+        return teacherRepository.GetById(id);
+    }
+    
 }

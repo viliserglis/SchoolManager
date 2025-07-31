@@ -4,6 +4,7 @@ namespace SchoolManager.Application.Demographics;
 
 public interface ITeacherApplication
 {
-    int CreateTeacher(Teacher eacher);
+    int CreateTeacher(Teacher teacher);
     IList<Teacher> GetAllTeachers();
+    Teacher GetById(int id);
 }

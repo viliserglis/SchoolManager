@@ -14,4 +14,9 @@ public class CourseApplication(ICourseRepository courseRepository) : ICourseAppl
     {
         return courseRepository.GetAllCourses();
     }
+
+    public Course GetById(int id)
+    {
+        return courseRepository.GetById(id);
+    }
 } 

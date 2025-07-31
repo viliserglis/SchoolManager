@@ -22,5 +22,12 @@ public class StudentController(IStudentApplication studentApplication)
     {
         return studentApplication.GetAllStudents();
     }
+    
+    [HttpGet]
+    [Route("{id}")]
+    public Student GetById(int id)
+    {
+        return studentApplication.GetById(id);
+    }
 }
 

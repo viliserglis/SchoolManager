@@ -46,4 +46,15 @@ public class StudentRepository(IConnectionFactory connectionFactory) : IStudentR
         var result = connection.Query<Student>(sql.Sql);
         return result.ToList();
     }
+    
+    public Student GetById(int id)
+    {
+        var query = new Query("demographics.students");
+        query.Select(_columms);
+        query.Where("id", id);
+        var sql = new PostgresCompiler().Compile(query);
+        using var connection = connectionFactory.GetConnection();
+        var result = connection.QueryFirst<Student>(sql.Sql, sql.NamedBindings);
+        return result;
+    }
 }
