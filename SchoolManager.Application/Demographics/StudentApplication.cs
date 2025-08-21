@@ -15,4 +15,9 @@ public class StudentApplication(IStudentRepository studentRepository) : IStudent
         return studentRepository.GetAllStudents();
     }
     
+    public Student GetById(int id)
+    {
+        return studentRepository.GetById(id);
+    }
+    
 }

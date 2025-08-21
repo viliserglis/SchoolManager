@@ -31,3 +31,41 @@ Content-Type: application/json
 "LastName": "Ms Doe",
   "qualification": "ABC"
 }
+
+###
+GET http://localhost:5228/api/student/all
+Accept: application/json
+
+###
+GET http://localhost:5228/api/student/1
+Accept: application/json
+
+###
+GET http://localhost:5228/api/teacher/all
+Accept: application/json
+
+###
+GET http://localhost:5228/api/teacher/1
+
+Accept: application/json
+
+###
+POST http://localhost:5228/api/course/create
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Name": "Mathematics 101",
+  "Room": "A101",
+  "Capacity": 30,
+  "TeacherId": 2
+}
+
+###
+GET http://localhost:5228/api/course/all
+Accept: application/json
+
+###
+GET http://localhost:5228/api/course/1
+Accept: application/json
+

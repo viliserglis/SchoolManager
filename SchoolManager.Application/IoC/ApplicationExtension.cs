@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using SchoolManager.Application.Academic;
 using SchoolManager.Application.Demographics;
 
 namespace SchoolManager.Application.IoC;
@@ -9,6 +10,7 @@ public static class ApplicationExtension
     {
         services.AddTransient<IStudentApplication, StudentApplication>();
         services.AddTransient<ITeacherApplication, TeacherApplication>();
+        services.AddTransient<ICourseApplication, CourseApplication>();
         
         return services;
     }

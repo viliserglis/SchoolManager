@@ -6,4 +6,5 @@ public interface IStudentRepository
 {
     int  CreateStudent(Student student);
     IList<Student> GetAllStudents();
+    Student GetById(int id);
 }

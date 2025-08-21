@@ -8,6 +8,15 @@ namespace SchoolManager.Repository.Repositories.TeacherRepository;
 
 public class TeacherRepository(IConnectionFactory connectionFactory) : ITeacherRepository
 {
+    
+    private readonly string[] _columms =
+    {
+
+        $"id as {nameof(Teacher.Id)}",
+        $"first_name as {nameof(Teacher.FirstName)}",
+        $"last_name as {nameof(Teacher.LastName)}",
+        $"qualification as {nameof(Teacher.Qualification)}",
+    };
     public int CreateTeacher(Teacher teacher)
     {
         var query = new Query("demographics.Teacher");
@@ -32,6 +41,22 @@ public class TeacherRepository(IConnectionFactory connectionFactory) : ITeacherR
 
     public IList<Teacher> GetAllTeachers()
     {
-        throw new NotImplementedException();
+        var query = new Query("demographics.Teacher");
+        query.Select(_columms);
+        var sql = new PostgresCompiler().Compile(query);
+        using var connection = connectionFactory.GetConnection();
+        var result = connection.Query<Teacher>(sql.Sql);
+        return result.ToList();
+    }
+    
+    public Teacher GetById(int id)
+    {
+        var query = new Query("demographics.Teacher");
+        query.Select(_columms);
+        query.Where("id", id);
+        var sql = new PostgresCompiler().Compile(query);
+        using var connection = connectionFactory.GetConnection();
+        var result = connection.QueryFirstOrDefault<Teacher>(sql.Sql, sql.NamedBindings);
+        return result;
     }
 }
