@@ -56,7 +56,7 @@ public class TeacherRepository(IConnectionFactory connectionFactory) : ITeacherR
         query.Where("id", id);
         var sql = new PostgresCompiler().Compile(query);
         using var connection = connectionFactory.GetConnection();
-        var result = connection.QueryFirst<Teacher>(sql.Sql, sql.NamedBindings);
+        var result = connection.QueryFirstOrDefault<Teacher>(sql.Sql, sql.NamedBindings);
         return result;
     }
 }

@@ -7,26 +7,66 @@ namespace SchoolManager.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TeacherController(ITeacherApplication TeacherApplication)
+public class TeacherController(ITeacherApplication TeacherApplication, ILogger<TeacherController> logger)
 {
     [HttpPost]
     [Route("Teacher")]
     public int CreateTeacher([FromBody] Teacher teacher)
     {
-        return TeacherApplication.CreateTeacher(teacher);
+        logger.LogInformation("Creating new teacher: {FirstName} {LastName}", teacher.FirstName, teacher.LastName);
+        try
+        {
+            var teacherId = TeacherApplication.CreateTeacher(teacher);
+            logger.LogInformation("Successfully created teacher with ID: {TeacherId}", teacherId);
+            return teacherId;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error creating teacher: {FirstName} {LastName}", teacher.FirstName, teacher.LastName);
+            throw;
+        }
     }
     
     [HttpGet]
     [Route("all")]
     public IList<Teacher> GetAllTeachers()
     {
-        return TeacherApplication.GetAllTeachers();
+        logger.LogInformation("Fetching all teachers");
+        try
+        {
+            var teachers = TeacherApplication.GetAllTeachers();
+            logger.LogInformation("Successfully fetched {TeacherCount} teachers", teachers.Count);
+            return teachers;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error fetching all teachers");
+            throw;
+        }
     }
     
     [HttpGet]
     [Route("{id}")]
     public Teacher GetById(int id)
     {
-        return TeacherApplication.GetById(id);
+        logger.LogInformation("Fetching teacher with ID: {TeacherId}", id);
+        try
+        {
+            var teacher = TeacherApplication.GetById(id);
+            if (teacher != null)
+            {
+                logger.LogInformation("Successfully fetched teacher with ID: {TeacherId}", id);
+            }
+            else
+            {
+                logger.LogWarning("Teacher not found with ID: {TeacherId}", id);
+            }
+            return teacher;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error fetching teacher with ID: {TeacherId}", id);
+            throw;
+        }
     }
 }

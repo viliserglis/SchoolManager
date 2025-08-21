@@ -46,6 +46,7 @@ Accept: application/json
 
 ###
 GET http://localhost:5228/api/teacher/1
+
 Accept: application/json
 
 ###
@@ -67,3 +68,4 @@ Accept: application/json
 ###
 GET http://localhost:5228/api/course/1
 Accept: application/json
+
