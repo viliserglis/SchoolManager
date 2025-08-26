@@ -11,6 +11,7 @@ public static class ApplicationExtension
         services.AddTransient<IStudentApplication, StudentApplication>();
         services.AddTransient<ITeacherApplication, TeacherApplication>();
         services.AddTransient<ICourseApplication, CourseApplication>();
+        services.AddTransient<IStudentCourseMapApplication, StudentCourseMapApplication>();
         
         return services;
     }

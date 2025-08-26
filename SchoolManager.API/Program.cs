@@ -17,6 +17,7 @@ try
     builder.Host.UseSerilog((context, services, configuration) => configuration
         .WriteTo.Console(
             outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
+        .WriteTo.Seq("http://localhost:5341")
     );
     
     // Add services to the container.
