@@ -8,4 +8,5 @@ public class Course
     public int Capacity { get; set; }
 
     public int TeacherId { get; set; }
+    
 }
