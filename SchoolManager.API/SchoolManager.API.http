@@ -70,14 +70,9 @@ GET http://localhost:5228/api/course/1
 Accept: application/json
 
 ###
-POST http://localhost:5228/api/studentcoursemap/enroll
+POST http://localhost:5228/api/studentcoursemap/enroll?studentid=1&courseid=1
 Accept: application/json
 Content-Type: application/json
-
-{
-  "StudentId": 1,
-  "CourseId": 1
-}
 
 ###
 GET http://localhost:5228/api/studentcoursemap/course/1/students

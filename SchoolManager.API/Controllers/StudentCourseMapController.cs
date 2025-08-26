@@ -9,18 +9,18 @@ public class StudentCourseMapController(IStudentCourseMapApplication studentCour
 {
     [HttpPost]
     [Route("enroll")]
-    public IActionResult EnrollStudentInCourse([FromBody] EnrollmentRequest request)
+    public IActionResult EnrollStudentInCourse([FromQuery] int courseId, int studentId)
     {
-        logger.LogInformation("Enrolling student {StudentId} in course {CourseId}", request.StudentId, request.CourseId);
+        logger.LogInformation("Enrolling student {StudentId} in course {CourseId}", studentId, courseId);
         try
         {
-            studentCourseMapApplication.EnrollStudentInCourse(request.StudentId, request.CourseId);
-            logger.LogInformation("Successfully enrolled student {StudentId} in course {CourseId}", request.StudentId, request.CourseId);
+            studentCourseMapApplication.EnrollStudentInCourse(studentId, courseId);
+            logger.LogInformation("Successfully enrolled student {StudentId} in course {CourseId}", studentId, courseId);
             return new OkResult();
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error enrolling student {StudentId} in course {CourseId}", request.StudentId, request.CourseId);
+            logger.LogError(ex, "Error enrolling student {StudentId} in course {CourseId}", studentId, courseId);
             throw;
         }
     }
@@ -60,10 +60,4 @@ public class StudentCourseMapController(IStudentCourseMapApplication studentCour
             throw;
         }
     }
-}
-
-public class EnrollmentRequest
-{
-    public int StudentId { get; set; }
-    public int CourseId { get; set; }
 }
