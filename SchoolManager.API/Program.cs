@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using SchoolManager.Application.IoC;
 using SchoolManager.Repository.IoC;
 using Serilog;
@@ -11,7 +12,7 @@ Log.Logger = new LoggerConfiguration()
 try
 {
     Log.Information("Starting SchoolManager API");
-    
+
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog((context, services, configuration) => configuration
@@ -19,10 +20,10 @@ try
             outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
         .WriteTo.Seq("http://localhost:5341")
     );
-    
+
     // Add services to the container.
     builder.Services.AddControllers();
-    
+
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -31,7 +32,33 @@ try
     builder.Services.AddRepository(builder.Configuration);
     builder.Services.AddApplication();
 
-    var app = builder.Build();
+    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddCookie(opt =>
+        {
+            // opt.LoginPath = "api/Auth/login";
+            opt.SlidingExpiration = true;
+            opt.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+            opt.Cookie.Name = "schoolmanager";
+            opt.Cookie.HttpOnly = true;
+            opt.Events = new CookieAuthenticationEvents
+            {
+                OnRedirectToLogin = e =>
+                {
+                    e.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return Task.CompletedTask;
+                },
+                OnRedirectToAccessDenied = e =>
+                {
+                    e.Response.StatusCode = StatusCodes.Status403Forbidden;
+                    return Task.CompletedTask;
+                }
+            };
+        });
+    
+    builder.Services.AddAuthorization();
+
+
+var app = builder.Build();
 
     app.UseSerilogRequestLogging(options =>
     {
@@ -52,8 +79,10 @@ try
 
     app.UseHttpsRedirection();
 
+    app.UseAuthentication();
+    
     app.UseAuthorization();
-
+    
     app.MapControllers();
 
     app.Run();
