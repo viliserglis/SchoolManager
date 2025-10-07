@@ -7,6 +7,7 @@ using SchoolManager.Repository.Repositories.CourseRepository;
 using SchoolManager.Repository.Repositories.StudentCourseMapRepository;
 using SchoolManager.Repository.Repositories.StudentRepository;
 using SchoolManager.Repository.Repositories.TeacherRepository;
+using SchoolManager.Repository.Repositories.UserRepository;
 
 namespace SchoolManager.Repository.IoC;
 
@@ -20,6 +21,7 @@ public static class RepositoryExtension
         services.AddTransient<ITeacherRepository, TeacherRepository>();
         services.AddTransient<ICourseRepository, CourseRepository>();
         services.AddTransient<IStudentCourseMap, StundentCourseMap>();
+        services.AddTransient<IUserRepository, UserRepository>();
         using var provider = services.BuildServiceProvider();
         var options = provider.GetRequiredService<IOptions<RepositoryConfiguration>>() ??
                       throw new ArgumentNullException(nameof(RepositoryConfiguration));

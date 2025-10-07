@@ -20,7 +20,7 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
     
     public int CreateCourse(Course course)
     {
-        var query = new Query(TableConstants.Course.WithSchema(SchemasConstants.Academic));
+        var query = new Query(TableConstants.Course.WithSchema(SchemaConstants.Academic));
         var data = new Dictionary<string, object>()
         {
             [ColumnConstants.Name] = course.Name,
@@ -41,7 +41,7 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
 
     public IList<Course> GetAllCourses()
     {
-        var query = new Query(TableConstants.Course.WithSchema(SchemasConstants.Academic));
+        var query = new Query(TableConstants.Course.WithSchema(SchemaConstants.Academic));
         query.Select(_columns);
         var sql = new PostgresCompiler().Compile(query);
         using var connection = connectionFactory.GetConnection();
@@ -51,7 +51,7 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
 
     public Course GetById(int id)
     {
-        var query = new Query(TableConstants.Course.WithSchema(SchemasConstants.Academic));
+        var query = new Query(TableConstants.Course.WithSchema(SchemaConstants.Academic));
         query.Select(_columns);
         query.Where(ColumnConstants.Id, id);
         var sql = new PostgresCompiler().Compile(query);

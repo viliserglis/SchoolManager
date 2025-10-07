@@ -12,4 +12,6 @@ public static class ColumnConstants
     public static readonly string FirstName = "first_name";
     public static readonly string LastName = "last_name";
     public static readonly string Qualification = "qualification";
+    public static readonly string Username = "username";
+    public static readonly string Password = "password";
 }
