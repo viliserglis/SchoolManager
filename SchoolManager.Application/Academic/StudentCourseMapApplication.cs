@@ -6,6 +6,12 @@ public class StudentCourseMapApplication(IStudentCourseMap studentCourseMapRepos
 {
     public void EnrollStudentInCourse(int studentId, int courseId)
     {
+        var students = studentCourseMapRepository.GetStudentIds(courseId);
+        if (students.Any(student => student == studentId))
+        {
+            throw new InvalidOperationException("Student already enrolled in this course");
+        }
+        
         studentCourseMapRepository.Create(studentId, courseId);
     }
 

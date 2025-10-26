@@ -1,5 +1,6 @@
 using Dapper;
 using SchoolManager.Models.Academic;
+using SchoolManager.Repository.Constants;
 using SchoolManager.Repository.Infrastructure;
 using SqlKata;
 using SqlKata.Compilers;
@@ -10,25 +11,23 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
 {
     private readonly string[] _columns =
     {
-        $"id as {nameof(Course.ID)}",
-        $"name as {nameof(Course.Name)}",
-        $"room as {nameof(Course.Room)}",
-        $"capacity as {nameof(Course.Capacity)}",
-        $"teacher_id as {nameof(Course.TeacherId)}",
-        
+        $"{ColumnConstants.Id} as {nameof(Course.ID)}",
+        $"{ColumnConstants.Name} as {nameof(Course.Name)}",
+        $"{ColumnConstants.Room} as {nameof(Course.Room)}",
+        $"{ColumnConstants.Capacity} as {nameof(Course.Capacity)}",
+        $"{ColumnConstants.TeacherId} as {nameof(Course.TeacherId)}",
     };
     
     public int CreateCourse(Course course)
     {
-        var query = new Query("academic.courses");
+        var query = new Query(TableConstants.Course.WithSchema(SchemaConstants.Academic));
         var data = new Dictionary<string, object>()
         {
-            ["name"] = course.Name,
-            ["room"] = course.Room,
-            ["capacity"] = course.Capacity,
-            ["teacher_id"] = course.TeacherId,
+            [ColumnConstants.Name] = course.Name,
+            [ColumnConstants.LastName] = course.Room,
+            [ColumnConstants.Capacity] = course.Capacity,
+            [ColumnConstants.TeacherId] = course.TeacherId,
         };
-
         query.AsInsert(data);
 
         var sql = new PostgresCompiler().Compile(query);
@@ -42,7 +41,7 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
 
     public IList<Course> GetAllCourses()
     {
-        var query = new Query("academic.courses");
+        var query = new Query(TableConstants.Course.WithSchema(SchemaConstants.Academic));
         query.Select(_columns);
         var sql = new PostgresCompiler().Compile(query);
         using var connection = connectionFactory.GetConnection();
@@ -52,9 +51,9 @@ public class CourseRepository(IConnectionFactory connectionFactory) : ICourseRep
 
     public Course GetById(int id)
     {
-        var query = new Query("academic.courses");
+        var query = new Query(TableConstants.Course.WithSchema(SchemaConstants.Academic));
         query.Select(_columns);
-        query.Where("id", id);
+        query.Where(ColumnConstants.Id, id);
         var sql = new PostgresCompiler().Compile(query);
         using var connection = connectionFactory.GetConnection();
         var result = connection.QueryFirst<Course>(sql.Sql, sql.NamedBindings);

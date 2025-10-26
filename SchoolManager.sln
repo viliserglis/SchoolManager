@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManager.Repository", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManager.Models", "SchoolManager.Models\SchoolManager.Models.csproj", "{C78DC28D-FFEB-4AA3-AFC0-6590666076E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailDeamon", "EmailDeamon\EmailDeamon.csproj", "{4BBDEE8C-C854-4C94-9025-9EA33F73F98C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{C78DC28D-FFEB-4AA3-AFC0-6590666076E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C78DC28D-FFEB-4AA3-AFC0-6590666076E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C78DC28D-FFEB-4AA3-AFC0-6590666076E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BBDEE8C-C854-4C94-9025-9EA33F73F98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BBDEE8C-C854-4C94-9025-9EA33F73F98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BBDEE8C-C854-4C94-9025-9EA33F73F98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BBDEE8C-C854-4C94-9025-9EA33F73F98C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
