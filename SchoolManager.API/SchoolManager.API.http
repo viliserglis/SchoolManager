@@ -91,3 +91,35 @@ Content-Type: application/json
   "username": "admin",
   "password": "admin123"
 }
+
+###
+POST http://localhost:5228/api/Auth/create-user
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "teacher1",
+  "password": "teacher123",
+  "role": 1
+}
+
+###
+POST http://localhost:5228/api/Auth/set-password
+Accept: application/json
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "newPassword": "123"
+}
+
+###
+POST http://localhost:5228/api/Auth/update-role
+Accept: application/json
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "newRole": 0
+}
+
